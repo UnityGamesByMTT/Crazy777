@@ -450,12 +450,12 @@ public class SlotBehaviour : MonoBehaviour
         if (!IsFreeSpin)
         {
             double initAmount = balance;
-            initAmount -= bet;
-            //m_UIManager.GetText(m_Key.m_text_balance_amount).text = initAmount.ToString("f2");
-            // Tween the balance display to reflect the new balance
+
+            balance = balance - bet;
+
             BalanceTween = DOTween.To(() => initAmount, (val) => initAmount = val, balance, 0.8f).OnUpdate(() =>
             {
-                m_UIManager.GetText(m_Key.m_text_balance_amount).text = (initAmount - bet).ToString("f2");
+                m_UIManager.GetText(m_Key.m_text_balance_amount).text = initAmount.ToString("f3");
             });
         }
 
@@ -558,8 +558,8 @@ public class SlotBehaviour : MonoBehaviour
             SpinDelay = 0.2f;
         }
 
-        m_UIManager.GetText(m_Key.m_text_win_amount).text = SocketManager.playerdata.currentWining.ToString("f2");
-        m_UIManager.GetText(m_Key.m_text_balance_amount).text = SocketManager.playerdata.Balance.ToString("f2");
+        m_UIManager.GetText(m_Key.m_text_win_amount).text = SocketManager.playerdata.currentWining.ToString("F3");
+        m_UIManager.GetText(m_Key.m_text_balance_amount).text = SocketManager.playerdata.Balance.ToString("F3");
 
         // TODO: Implement backend logic to check for bonus games and win popups
         CheckPopups = false; // Simulated: No popups for demo
